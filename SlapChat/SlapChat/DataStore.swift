@@ -91,10 +91,16 @@ class DataStore {
         
         //***************************************************************************************
         
+        let thirdRecipient: Recipient = NSEntityDescription.insertNewObjectForEntityForName("Recipient", inManagedObjectContext: managedObjectContext) as! Recipient
+        
+        thirdRecipient.name = "Sara 3"
+        
         let messageThree: Message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: managedObjectContext) as! Message
         
         messageThree.content = "Message 3"
         messageThree.createdAt = NSDate()
+        
+        thirdRecipient.messages?.insert(messageThree)
         
         saveContext()
         fetchData()
