@@ -12,7 +12,7 @@ class TableViewController: UITableViewController {
 
     
     var managedMessageObjects: [Message] = []
-    let store: DataStore = DataStore()
+    let store = DataStore.sharedDataStore
     
     override func viewDidLoad() {
         super.viewDidLoad()
