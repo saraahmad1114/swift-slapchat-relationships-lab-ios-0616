@@ -9,15 +9,28 @@
 import UIKit
 
 class RecipientTableViewController: UITableViewController {
+    
+    let store = DataStore.sharedDataStore
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        store.fetchData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(true)
+        
+        store.fetchData()
+        
+        tableView.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +42,28 @@ class RecipientTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.store.recipients.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("basicCell", forIndexPath: indexPath)
 
-        // Configure the cell...
-
+        cell.textLabel!.text = store.recipients[indexPath.row].name
+        
         return cell
     }
-    */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
