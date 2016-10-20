@@ -60,8 +60,12 @@ class RecipientTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let indexPath = tableView.indexPathForSelectedRow
+        let selectedRecipient = store.recipients[indexPath!.row]
+        let messageViewController = segue.destinationViewController as! TableViewController
+        if let messages = selectedRecipient.messages {
+            messageViewController.messages = messages
+        }
     }
     
 
